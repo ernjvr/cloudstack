@@ -21,8 +21,7 @@ set -x
 
 function cleanup_apt() {
   apt-get -y remove --purge dictionaries-common busybox isc-dhcp-client isc-dhcp-common \
-    task-english task-ssh-server tasksel tasksel-data laptop-detect wamerican \
-    debconf-i18n sharutils gnupg gnupg-agent
+    task-english task-ssh-server tasksel tasksel-data laptop-detect wamerican sharutils
 
   apt-get -y autoremove --purge
   apt-get autoclean
