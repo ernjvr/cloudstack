@@ -495,7 +495,8 @@ clean_ipalias_config() {
 
   # New
   rm -f /etc/apache2/sites-enabled/vhost-*.conf
-  rm -f /etc/apache2/sites-enabled/000-default
+  rm -f /etc/apache2/sites-enabled/000-default.conf
+  rm -f /etc/apache2/sites-enabled/default-ssl.conf
 
   rm -rf /etc/failure_config
 }
@@ -513,6 +514,8 @@ setup_apache2_common() {
 
 setup_apache2() {
   log_it "Setting up apache web server"
+  mkdir -p /var/www
+  chown www-data:www-data -R /var/www
   clean_ipalias_config
   setup_apache2_common
   local ip=$1

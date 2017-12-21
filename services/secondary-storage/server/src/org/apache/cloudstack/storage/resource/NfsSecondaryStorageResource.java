@@ -235,8 +235,7 @@ public class NfsSecondaryStorageResource extends ServerResourceBase implements S
             String nfsVersionParam = (String)params.get("nfsVersion");
             try {
                 nfsVersion = Integer.valueOf(nfsVersionParam);
-            }
-            catch (NumberFormatException e){
+            } catch (NumberFormatException e){
                 s_logger.error("Couldn't cast " + nfsVersionParam + " to integer");
                 return null;
             }
@@ -2269,9 +2268,10 @@ public class NfsSecondaryStorageResource extends ServerResourceBase implements S
         if (!_inSystemVM) {
             return;
         }
-        Script command = new Script("/bin/bash", s_logger);
-        command.add("-c");
-        command.add("if [ -f /etc/init.d/ssh ]; then service ssh restart; else service sshd restart; fi ");
+        //Check whether the Apache server is running
+        Script command = new Script("/bin/systemctl", s_logger);
+        command.add("restart");
+        command.add("ssh");
         String result = command.execute();
         if (result != null) {
             s_logger.warn("Error in starting sshd service err=" + result);
